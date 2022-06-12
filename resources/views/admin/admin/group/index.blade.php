@@ -5,12 +5,14 @@
 @section('content')
     <div class="row row mb-4">
         <div class="col-md-3">
-          {{--  <a
-                href="{{route('admin.group.create')}}"
-                type="button"
-                class="btn btn-block btn-outline-success">
-                {{getTextAdmin('add_btn')}}
-            </a>--}}
+            @can('create', \App\Models\Admin\AdminUserGroup::class)
+                <a
+                    href="{{route('admin.group.create')}}"
+                    type="button"
+                    class="btn btn-block btn-outline-success">
+                    {{getTextAdmin('add_btn')}}
+                </a>
+            @endcan
         </div>
     </div>
     @if(Session::has('status'))
@@ -37,12 +39,14 @@
                             <td>{{$item['name']}}</td>
 
                             <td>
-                               {{-- <a
-                                    href="{{route('admin.group.edit', $item['id'])}}"
-                                    title="{{getTextAdmin('bt_edit')}}"
-                                    class="btn btn-info btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>--}}
+                                @can('update', \App\Models\Admin\AdminUserGroup::class)
+                                   <a
+                                        href="{{route('admin.group.edit', $item['id'])}}"
+                                        title="{{getTextAdmin('bt_edit')}}"
+                                        class="btn btn-info btn-sm">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

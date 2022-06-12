@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;
-        $redirectName = '';
+
         foreach ($guards as $guard) {
             $redirectName = ($guard == 'admin')
                 ? RouteServiceProvider::DASHBORD

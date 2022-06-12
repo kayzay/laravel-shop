@@ -5,12 +5,14 @@
 @section('content')
 <div class="row row mb-4">
     <div class="col-md-3">
-        <a
-            href="{{route('category.create')}}"
-            type="button"
-            class="btn btn-block btn-outline-success">
-            {{getTextAdmin('add_btn')}}
-        </a>
+        @can('create', \App\Models\Shop\Category\Category::class)
+            <a
+                href="{{route('category.create')}}"
+                type="button"
+                class="btn btn-block btn-outline-success">
+                {{getTextAdmin('add_btn')}}
+            </a>
+        @endcan
     </div>
 </div>
 @if(Session::has('status'))
@@ -41,29 +43,32 @@
                             </span>
                         </td>
                         <td>
+                            @can('update', \App\Models\Shop\Category\Category::class)
                             <a
                                 href="{{route('category.edit', $item['id'])}}"
                                 title="{{getTextAdmin('bt_edit')}}"
                                 class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                             </a>
+                            @endcan
                             @if ($item['status_id'] == 1)
-                            <form
-                            name="category-form"
-                            id="categoryForm"
-                            action="{{route('category.destroy', $item['id'])}}"
-                            method="POST"
-                            style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger btn-sm"
-                                    title="{{getTextAdmin('bt_inactive')}}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-
+                                    @can('update', \App\Models\Shop\Category\Category::class)
+                                        <form
+                                        name="category-form"
+                                        id="categoryForm"
+                                        action="{{route('category.destroy', $item['id'])}}"
+                                        method="POST"
+                                        style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button
+                                                type="submit"
+                                                class="btn btn-danger btn-sm"
+                                                title="{{getTextAdmin('bt_inactive')}}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                @endcan
                             @endif
                         </td>
                     </tr>

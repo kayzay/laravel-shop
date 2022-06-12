@@ -5,12 +5,14 @@
 @section('content')
 <div class="row row mb-4">
     <div class="col-md-3">
-        <a
-            href="{{route('product.create')}}"
-            type="button"
-            class="btn btn-block btn-outline-success">
-            {{getTextAdmin('add_btn')}}
-        </a>
+        @can('create', \App\Models\Shop\Product\Product::class)
+            <a
+                href="{{route('product.create')}}"
+                type="button"
+                class="btn btn-block btn-outline-success">
+                {{getTextAdmin('add_btn')}}
+            </a>
+        @endcan
     </div>
 </div>
 @if(Session::has('status'))
@@ -51,13 +53,16 @@
                             </span>
                         </td>
                         <td>
+                            @can('update', \App\Models\Shop\Product\Product::class)
                             <a
                                 href="{{route('product.edit', $item['id'])}}"
                                 title="{{__('product.bt_edit')}}"
                                 class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                             </a>
+                            @endcan
                             @if ($item['status_id'] == 1)
+                                    @can('delete', \App\Models\Shop\Product\Product::class)
                             <form
                             name="category-form"
                             id="categoryForm"
@@ -73,7 +78,7 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-
+                                    @endcan
                             @endif
                         </td>
                     </tr>

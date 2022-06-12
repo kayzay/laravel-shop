@@ -18,12 +18,14 @@
 @section('content')
     <div class="row row mb-4">
         <div class="col-md-3">
-            <a
-                href="{{route('system.language.create')}}"
-                type="button"
-                class="btn btn-block btn-outline-success">
-                {{getTextAdmin('add_btn')}}
-            </a>
+            @can('create', \App\Models\Language::class)
+                <a
+                    href="{{route('system.language.create')}}"
+                    type="button"
+                    class="btn btn-block btn-outline-success">
+                    {{getTextAdmin('add_btn')}}
+                </a>
+            @endcan
         </div>
     </div>
     @if(Session::has('status'))
@@ -64,12 +66,14 @@
                                         {{getTextAdmin('language_def')}}
                                     </span>
                                     @else
-                                <a
-                                    href="{{route('system.language.edit', $item['id'])}}"
-                                    title="{{getTextAdmin('bt_edit')}}"
-                                    class="btn btn-info btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
+                                    @can('update', \App\Models\Language::class)
+                                        <a
+                                            href="{{route('system.language.edit', $item['id'])}}"
+                                            title="{{getTextAdmin('bt_edit')}}"
+                                            class="btn btn-info btn-sm">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                    @endcan
                                     @endif
                             </td>
                         </tr>

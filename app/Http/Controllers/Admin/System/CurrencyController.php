@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Admin\System;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shop\Price\Currency;
 use App\Repository\System\RepositoryCurrency;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Currency::class, Currency::class);
+    }
     /**
      * Display a listing of the resource.
      *

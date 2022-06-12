@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Shop;
 
+
 use App\Helpers\Categories\PreparationAddCategory;
 use App\Helpers\Categories\PreparationEditCategory;
 use App\Http\Controllers\Controller;
@@ -15,6 +16,10 @@ use App\Repository\RepositoryLanguage;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class, Category::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +67,7 @@ class CategoryController extends Controller
                     ->saveLogo($request->file('main.img'), RepositoryCategory::getDefaultLogo())
                     ->getData('main');
 
-                 //   dbg([$main, $descriptions]);die;
+
         $newCategory = new Category($main);
         $newCategory->save();
 

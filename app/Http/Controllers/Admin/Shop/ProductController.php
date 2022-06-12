@@ -6,19 +6,19 @@ use App\Helpers\Products\PreparationEditProduct;
 use App\Helpers\Products\PreparationAddProduct;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
-use App\Models\Shop\Price\Price;
 use App\Models\Shop\Product\Product;
 use App\Models\Shop\Product\ProductCategoryTree;
 use App\Models\Shop\Product\ProductDescription;
-use App\Models\UserGroup;
 use App\Repository\Category\RepositoryCategory;
 use App\Repository\Product\RepositoryProduct;
-use App\Repository\Product\RepositoryProductCategoryTree;
 use App\Repository\RepositoryLanguage;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, Product::class);
+    }
     /**
      * Display a listing of the resource.
      *

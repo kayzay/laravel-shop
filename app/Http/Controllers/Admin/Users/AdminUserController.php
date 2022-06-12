@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Users;
 
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RequestsEditAdminUser;
 use App\Http\Requests\Admin\RequestsAdminUser;
@@ -11,11 +12,14 @@ use App\Models\Admin\AdminUser as ModelAdminUser;
 use App\Repository\Admin\RepositoryAdminStatus;
 use App\Repository\Admin\RepositoryAdminUserGroup;
 use App\Repository\Admin\RepositoryUserAdmin;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(AdminUser::class, AdminUser::class);
+    }
     /**
      * Display a listing of the resource.
      *

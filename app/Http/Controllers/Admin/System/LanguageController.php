@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Language::class, Language::class);
+    }
     /**
      * Display a listing of the resource.
      *

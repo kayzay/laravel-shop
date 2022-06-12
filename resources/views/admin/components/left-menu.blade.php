@@ -9,7 +9,8 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            @foreach ($menuItems as $key => $items )
+
+                @foreach ($menuItems as $key => $items)
                 @if (is_string($items))
                 <li class='nav-item'>
                     <a href='{{$items}}' class='nav-link'>

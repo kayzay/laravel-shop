@@ -1,6 +1,5 @@
 @extends("admin.layout.base")
 @section('footerJs')
-
 @endsection
 @section('content')
     @if ($errors->any())
@@ -17,11 +16,11 @@
                 method="POST"
                 class="row">
             @csrf
-            @include('admin.partial.adminUser.form', ['groupList' => $groupList, 'statusList' => $statusList])
+            @include('admin.partial.adminUser.groupForm', ['policyList' => $policyList])
         </form>
         <div class="row pb-2">
             <div class="col-12">
-                <button type="submit" form="admin_form" class="btn btn-success float-right">{{__('admin_user.btnSave')}}</button>
+                <button type="submit" form="admin_form" class="btn btn-success float-right">{{getTextAdmin('btnSave')}}</button>
             </div>
         </div>
     </section>

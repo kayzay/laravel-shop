@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             ProductStatus::class,
             UserGroup::class,
             AdminStatus::class,
-            SeederCurrency::class
+            SeederCurrency::class,
+            SeedAdminPolicy::class
         ]);
     }
 }

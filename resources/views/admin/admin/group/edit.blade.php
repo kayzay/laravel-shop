@@ -11,22 +11,23 @@
         </div>
     @endif
     <section class="content">
-        <form   name="admin_form"
-                id="admin_form"
-                action="{{route('admin.admin.update', $info['id'])}}"
-                method="POST"
-                class="row">
+        <form name="group_form"
+              id="group_form"
+              action="{{route('admin.group.update', $group['id'])}}"
+              method="POST"
+              class="row">
             @csrf
             @method('PATCH')
-            @include('admin.partial.adminUser.form', [
-                        'groupList' => $groupList
-                        , 'statusList' => $statusList
-                        , 'info' => $info
+            @include('admin.partial.adminUser.groupForm', [
+                    'policyList' => $policyList,
+                    'group' => $group,
+                    'policy' => $policy
                     ])
         </form>
         <div class="row pb-2">
             <div class="col-12">
-                <button type="submit" form="admin_form" class="btn btn-success float-right">{{__('admin_user.btnSave')}}</button>
+                <button type="submit" form="group_form"
+                        class="btn btn-success float-right">{{getTextAdmin('btnSave')}}</button>
             </div>
         </div>
     </section>

@@ -5,6 +5,7 @@ namespace App\Repository\Admin;
 
 
 use App\Helpers\Traits\Instanced;
+use App\Models\Admin\AdminRule;
 use App\Models\Admin\AdminUserGroup;
 use App\Repository\Base\BaseRepository;
 
@@ -51,6 +52,33 @@ class RepositoryAdminUserGroup extends BaseRepository
             ->toArray();
 
         return $data;
+    }
+
+    public function getRules($id)
+    {
+        $rules = $this->getCondition()
+            ->where('id', $id)
+            ->with(['roles'])
+            //  ->with(['roles:rules, group_id, admin_policy_id'])
+            ->get()
+            ->toArray();
+
+        $rules = current($rules);
+
+        $rules['roles'] = collect($rules['roles'])
+            ->transform(function ($item) {
+                return [
+                    'admin_policy_id' => $item['admin_policy_id'],
+                    's' => (AdminRule::RULES['show'] & $item['rules']),
+                    'c' => (AdminRule::RULES['create'] & $item['rules']),
+                    'u' => (AdminRule::RULES['update'] & $item['rules']),
+                    'd' => (AdminRule::RULES['delete'] & $item['rules']),
+                ];
+            })
+            ->keyBy('admin_policy_id')
+            ->toArray();
+
+        return $rules;
     }
 
     private function _selectGroup()
